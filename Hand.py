@@ -17,7 +17,12 @@ while True:
 
     if results.multi_hand_landmarks:
         for hand_dot in results.multi_hand_landmarks:
-            mp_track.draw_landmarks(img, hand_dot,mpHands.HAND_CONNECTIONS)
+            for id,lm in enumerate(hand_dot.landmark): #This will show us the landmark of the dots
+                w,h,c = img.shape
+                cx,cy = int(lm.x*w),int(lm.y*h)
+                print(cx,cy)
+
+            mp_track.draw_landmarks(img, hand_dot,mpHands.HAND_CONNECTIONS)#Shows the dots and connections
 
     cTime = time.time()         #The current timestamp
     fps = 1 / (cTime - pTime)
